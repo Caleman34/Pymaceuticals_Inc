@@ -27,7 +27,168 @@ duplicateMice_df
 #Get all the data for the duplicate mouse ID
 merge_df.loc[merge_df["Mouse ID"] == "g989"]
 ```
-
+<div>
+<table border=\"1\" class=\"dataframe\">
+         <thead>
+           <tr style=\"text-align: right;\">
+             <th></th>
+             <th>Mouse ID</th>
+             <th>Drug Regimen</th>
+             <th>Sex</th>
+             <th>Age_months</th>
+             <th>Weight (g)</th>
+             <th>Timepoint</th>
+             <th>Tumor Volume (mm3)</th>
+             <th>Metastatic Sites</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <th>908</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>0</td>
+             <td>45.000000</td>
+             <td>0</td>
+           </tr>
+           <tr>
+             <th>909</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>0</td>
+             <td>45.000000</td>
+             <td>0</td>
+           </tr>
+           <tr>
+             <th>910</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>5</td>
+             <td>48.786801</td>
+             <td>0</td>
+           </tr>
+           <tr>
+             <th>911</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>5</td>
+             <td>47.570392</td>
+             <td>0</td>
+           </tr>
+           <tr>
+             <th>912</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>10</td>
+             <td>51.745156</td>
+             <td>0</td>
+           </tr>
+           <tr>
+             <th>913</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>10</td>
+             <td>49.880528</td>
+             <td>0</td>
+           </tr>
+           <tr>
+             <th>914</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>15</td>
+              <td>51.325852</td>
+             <td>1</td>
+           </tr>
+           <tr>
+             <th>915</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>15</td>
+             <td>53.442020</td>
+             <td>0</td>
+           </tr>
+           <tr>
+             <th>916</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>20</td>
+             <td>55.326122</td>
+             <td>1</td>
+           </tr>
+           <tr>
+             <th>917</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>20</td>
+             <td>54.657650</td>
+             <td>1</td>
+           </tr>
+           <tr>
+             <th>918</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>25</td>
+             <td>56.045564</td>
+             <td>1</td>
+           </tr>
+           <tr>
+             <th>919</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>30</td>
+             <td>59.082294</td>
+             <td>1</td>
+           </tr>
+           <tr>
+             <th>920</th>
+             <td>g989</td>
+             <td>Propriva</td>
+             <td>Female</td>
+             <td>21</td>
+             <td>26</td>
+             <td>35</td>
+             <td>62.570880</td>
+             <td>2</td>
+           </tr>
+         </tbody>
+       </table>
+       </div>
 
 * Generate a summary statistics table consisting of the mean, median, variance, standard deviation, and SEM of the tumor volume for each drug regimen.
 ```python
@@ -48,7 +209,7 @@ summary_stats_df
 ```
 <div>
 <table border=\"1\" class=\"dataframe\">
-         <thead>\n",
+         <thead>
            <tr style=\"text-align: right;\">
              <th></th>
              <th>Mean</th>
@@ -187,7 +348,7 @@ plt.title("Mouse Sex")
 plt.savefig("Analysis/MalevFemaleDist_pandas.png")
 ```
 
-![malefemalpandas](MalevFemaleDist_pandas.png)
+![malefemalpandas](Analysis/MalevFemaleDist_pandas.png)
 
 ```python
 #generate a pie plot showing the distribution of female to male mice using pyplot
