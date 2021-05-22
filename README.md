@@ -73,6 +73,4 @@ Here are some final considerations:
 
 * Get help when you need it! There is never any shame in asking. But, as always, ask a _specific_ question. You'll never get a great answer to "I'm lost."
 
-### Copyright
 
-Trilogy Education Services © 2020. All Rights Reserved.
