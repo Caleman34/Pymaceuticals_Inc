@@ -17,24 +17,190 @@ As a senior data analyst at the company, you've been given access to the complet
 Your tasks are to do the following:
 
 * Before beginning the analysis, check the data for any mouse ID with duplicate time points and remove any data associated with that mouse ID.
+```python
+#get duplicate mice by Mouse ID and Timepoint
+duplicateMice_df = merge_df[merge_df.duplicated(["Mouse ID", "Timepoint"])]
+duplicateMice_df
+```
 
-* Use the cleaned data for the remaining steps.
+```python
+#Get all the data for the duplicate mouse ID
+merge_df.loc[merge_df["Mouse ID"] == "g989"]
+```
+
 
 * Generate a summary statistics table consisting of the mean, median, variance, standard deviation, and SEM of the tumor volume for each drug regimen.
+```python
+#Summary statistics of tumor volume
+drug_regimen_groupby = de_dup_df.groupby(["Drug Regimen"])
+reg_mean = drug_regimen_groupby["Tumor Volume (mm3)"].mean()
+reg_med = drug_regimen_groupby["Tumor Volume (mm3)"].median()
+reg_var = drug_regimen_groupby["Tumor Volume (mm3)"].var()
+reg_std = drug_regimen_groupby["Tumor Volume (mm3)"].std()
+reg_sem = drug_regimen_groupby["Tumor Volume (mm3)"].sem()
+
+summary_stats_df = pd.DataFrame({"Mean": reg_mean.map("{:.2f}".format),
+                                 "Median": reg_med.map("{:.2f}".format),
+                                 "Variance": reg_var.map("{:.2f}".format),
+                                 "Standard Deviation": reg_std.map("{:.2f}".format),
+                                 "SEM": reg_sem.map("{:.2f}".format)})
+summary_stats_df
+```
+<div>
+<table border=\"1\" class=\"dataframe\">
+         <thead>\n",
+           <tr style=\"text-align: right;\">
+             <th></th>
+             <th>Mean</th>
+             <th>Median</th>
+             <th>Variance</th>
+             <th>Standard Deviation</th>
+             <th>SEM</th>
+           </tr>
+           <tr>
+             <th>Drug Regimen</th>
+             <th></th>
+             <th></th>
+             <th></th>
+             <th></th>
+             <th></th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <th>Capomulin</th>
+             <td>40.68</td>
+             <td>41.56</td>
+             <td>24.95</td>
+             <td>4.99</td>
+             <td>0.33</td>
+           </tr>
+           <tr>
+             <th>Ceftamin</th>
+             <td>52.59</td>
+             <td>51.78</td>
+             <td>39.29</td>
+             <td>6.27</td>
+             <td>0.47</td>
+           </tr>
+           <tr>
+             <th>Infubinol</th>
+             <td>52.88</td>
+             <td>51.82</td>
+             <td>43.13</td>
+             <td>6.57</td>
+             <td>0.49</td>
+           </tr>
+           <tr>
+             <th>Ketapril</th>
+             <td>55.24</td>
+             <td>53.70</td>
+             <td>68.55</td>
+             <td>8.28</td>
+             <td>0.60</td>
+           </tr>
+           <tr>
+             <th>Naftisol</th>
+             <td>54.33</td>
+             <td>52.51</td>
+             <td>66.17</td>
+            <td>8.13</td>
+             <td>0.60</td>
+           </tr>
+           <tr>
+             <th>Placebo</th>
+             <td>54.03</td>
+             <td>52.29</td>
+             <td>61.17</td>
+             <td>7.82</td>
+             <td>0.58</td>
+           </tr>
+           <tr>
+             <th>Propriva</th>
+             <td>52.32</td>
+             <td>50.45</td>
+             <td>43.85</td>
+             <td>6.62</td>
+             <td>0.54</td>
+           </tr>
+           <tr>
+             <th>Ramicane</th>
+             <td>40.22</td>
+             <td>40.67</td>
+             <td>23.49</td>
+             <td>4.85</td>
+             <td>0.32</td>
+           </tr>
+           <tr>
+             <th>Stelasyn</th>
+             <td>54.23</td>
+             <td>52.43</td>
+             <td>59.45</td>
+             <td>7.71</td>
+             <td>0.57</td>
+           </tr>
+           <tr>
+             <th>Zoniferol</th>
+             <td>53.24</td>
+             <td>51.82</td>
+             <td>48.53</td>
+             <td>6.97</td>
+             <td>0.52</td>
+           </tr>
+         </tbody>
+       </table>
+       </div>
 
 * Generate a bar plot using both Pandas's `DataFrame.plot()` and Matplotlib's `pyplot` that shows  the number of total mice for each treatment regimen throughout the course of the study.
+```python
+#Generate a bar plot showing the total number of unique mice tested on each drug regimint
+drug_regimen_df = de_dup_df[["Drug Regimen", "Mouse ID"]]
+drug_regimen_names = drug_regimen_df.groupby(["Drug Regimen"]).count()
+drug_regimen_names.plot(kind="bar")
+plt.ylim((0, 235))
+plt.title("Total Unique Mice Per Drug Regimen")
+plt.xlabel("Drug Regimen")
+plt.ylabel("Mice Count")
+plt.savefig("Analysis/TotalUniqueMiceBar.png", bbox_inches='tight')
+plt.show()
+```
 
-  * **NOTE:** These plots should look identical.
+![totaluniquemousebar](Analysis/TotalUniqueMiceBar.png)
+
+```python
+#Generate a bar plot showing the total number of unique mice tested on each drug regimint
+grp_time = de_dup_df.groupby(['Drug Regimen'])
+plot_data = grp_time.agg({'Mouse ID':['count']})
+
+plot_data.columns = ['Mouse Count']
+plot_data.plot(kind='bar', title="Mouse Count by Regimen")
+plt.savefig("Analysis/TotalUniqueMiceBar2.png", bbox_inches='tight')
+```
+
+![totaluniquemouse](Analysis/TotalUniqueMiceBar2.png)
 
 * Generate a pie plot using both Pandas's `DataFrame.plot()` and Matplotlib's `pyplot` that shows the distribution of female or male mice in the study.
+```python
+#generate a pie plot showing the distribution of female to male mice using pandas
+plt.pie(gender_count, shadow=True, autopct="%1.2f%%", explode=explode, colors=colors, labels=('Male', 'Female'))
+plt.title("Mouse Sex")
+plt.savefig("Analysis/MalevFemaleDist_pandas.png")
+```
 
-  * **NOTE:** These plots should look identical.
+![malefemalpandas](MalevFemaleDist_pandas.png)
 
-* Calculate the final tumor volume of each mouse across four of the most promising treatment regimens: Capomulin, Ramicane, Infubinol, and Ceftamin. Calculate the quartiles and IQR and quantitatively determine if there are any potential outliers across all four treatment regimens.
+```python
+#generate a pie plot showing the distribution of female to male mice using pyplot
+gender_count = merge_df["Sex"].value_counts()
+colors = ["lightskyblue", "lightcoral"]
+explode = [0.1, 0]
+gender_count.plot(kind="pie", autopct="%1.1f%%", explode=explode, colors=colors, shadow=True)
+plt.title("Male versus Female Mouse Distribution")
+plt.savefig("Analysis/MalevFemaleDist.png")
+plt.show()
+```
 
-* Using Matplotlib, generate a box and whisker plot of the final tumor volume for all four treatment regimens and highlight any potential outliers in the plot by changing their color and style.
-
-  **Hint**: All four box plots should be within the same figure. Use this [Matplotlib documentation page](https://matplotlib.org/gallery/pyplots/boxplot_demo_pyplot.html#sphx-glr-gallery-pyplots-boxplot-demo-pyplot-py) for help with changing the style of the outliers.
+![malefemalemat](Analysis/MalevFemaleDist.png)
 
 * Select a mouse that was treated with Capomulin and generate a line plot of tumor volume vs. time point for that mouse.
 ```python
