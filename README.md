@@ -185,7 +185,7 @@ merge_df.loc[merge_df["Mouse ID"] == "g989"]
        </table>
        </div>
 
-* Generate a summary statistics table consisting of the mean, median, variance, standard deviation, and SEM of the tumor volume for each drug regimen.
+Generate a summary statistics table consisting of the mean, median, variance, standard deviation, and SEM of the tumor volume for each drug regimen.
 ```python
 #Summary statistics of tumor volume
 drug_regimen_groupby = de_dup_df.groupby(["Drug Regimen"])
@@ -307,7 +307,7 @@ summary_stats_df
        </table>
        </div>
 
-* Generate a bar plot using both Pandas's `DataFrame.plot()` and Matplotlib's `pyplot` that shows  the number of total mice for each treatment regimen throughout the course of the study.
+Generate a bar plot using both Pandas's `DataFrame.plot()` and Matplotlib's `pyplot` that shows  the number of total mice for each treatment regimen throughout the course of the study.
 ```python
 #Generate a bar plot showing the total number of unique mice tested on each drug regimint
 drug_regimen_df = de_dup_df[["Drug Regimen", "Mouse ID"]]
@@ -335,7 +335,7 @@ plt.savefig("Analysis/TotalUniqueMiceBar2.png", bbox_inches='tight')
 
 ![totaluniquemouse](Analysis/TotalUniqueMiceBar2.png)
 
-* Generate a pie plot using both Pandas's `DataFrame.plot()` and Matplotlib's `pyplot` that shows the distribution of female or male mice in the study.
+Generate a pie plot using both Pandas's `DataFrame.plot()` and Matplotlib's `pyplot` that shows the distribution of female or male mice in the study.
 ```python
 #generate a pie plot showing the distribution of female to male mice using pandas
 plt.pie(gender_count, shadow=True, autopct="%1.2f%%", explode=explode, colors=colors, labels=('Male', 'Female'))
@@ -358,7 +358,7 @@ plt.show()
 
 ![malefemalemat](Analysis/MalevFemaleDist.png)
 
-* Select a mouse that was treated with Capomulin and generate a line plot of tumor volume vs. time point for that mouse.
+Select a mouse that was treated with Capomulin and generate a line plot of tumor volume vs. time point for that mouse.
 ```python
 #generate a line plot of tumor volume vs. timepoint for a mouse treated with Capomulin
 mouse_id = "b128"
@@ -378,7 +378,7 @@ plt.show()
 
 ![tumorvolumeb128](Analysis/TumorVolumeLine_pyplot.png)
 
-* Generate a scatter plot of mouse weight versus average tumor volume for the Capomulin treatment regimen.
+Generate a scatter plot of mouse weight versus average tumor volume for the Capomulin treatment regimen.
 ```python
 # Generate a scatter plot of average tumor volume vs. mouse weight for the Capomulin regimen
 capo_average_tumor_vol = capo_df.groupby(["Mouse ID"]).mean()
@@ -396,7 +396,7 @@ plt.show()
 
 ![tumorvolumesp](Analysis/TumorVolumeScatter_pyplot.png)
 
-* Calculate the correlation coefficient and linear regression model between mouse weight and average tumor volume for the Capomulin treatment. Plot the linear regression model on top of the previous scatter plot.
+Calculate the correlation coefficient and linear regression model between mouse weight and average tumor volume for the Capomulin treatment. Plot the linear regression model on top of the previous scatter plot.
 ```python
 # Calculate the correlation coefficient and linear regression model 
 # for mouse weight and average tumor volume for the Capomulin regimen
