@@ -1,3 +1,15 @@
+## Repository Info:
+
+Repository Size: 2 MB
+
+Code can be run using Visual Studio Code or Jupyter Notebook
+
+Given data from an animal study of tumors from a fictional company, tables and figures were generated to analyze the effectiveness of different treatments in mice.
+
+![1](Images/1.png)
+
+![2](Images/2.png)
+
 # The Power of Plots
 
 ## Background
